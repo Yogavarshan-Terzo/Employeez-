@@ -1,0 +1,14 @@
+.nav-class{
+  background-color: blueviolet;
+  margin-bottom: -50px;
+}
+.toolbar-header{
+  margin-left: 20px;
+  font-size: 25px;
+}
+.toolbar-text{
+  margin-left: 15px;
+}
+.toolbar-logout{
+  margin-left: 1000px;
+}
