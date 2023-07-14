@@ -1,0 +1,21 @@
+<div class="card" style="font-family: 'Comic Sans MS';width: 100%">
+  <div class="card-header">
+    Apply Leave
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Special title treatment</h5>
+    <table class="table-bordered" style="border: black 1px" >
+      <tr class="table-bordered">
+        <td class="border-black">Sick</td>
+        <td>Earned</td>
+        <td>Paternity</td>
+      </tr>
+    </table>
+    <p class="card-text"></p>
+    <div class="form-group mb-3">
+      <label for="designation">Designation</label>
+      <input type="text" class="form-control" id="designation" name="designation" [(ngModel)]="applyLeaveDto">
+    </div>
+    <a (click)="applyLeave()" class="btn btn-primary">Apply</a>
+  </div>
+</div>

@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {RegisterDto} from "../models/register-dto.model";
 import {UpdateDto} from "../models/update-dto.model";
 import {PageDto} from "../models/page-dto";
+import {setParseTemplateAsSourceFileForTest} from "@angular/compiler-cli/src/ngtsc/typecheck/diagnostics";
 
 
 interface Employee{
@@ -17,17 +18,17 @@ export class EmployeeService {
   constructor( private http : HttpClient) { }
 
   getEmployees(pageDto:PageDto): Observable<any> {
-    const url = `${this.baseUrl}/employees/all`;
+    const url = `${this.baseUrl}/employees/${pageDto.offset}/${pageDto.field}/${pageDto.direction}`;
     const jwtToken = localStorage.getItem('token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${jwtToken}`);
-    return this.http.post<any>(url,pageDto, { headers });
+    return this.http.get<any>(url, { headers });
   }
 
-  searchEmployee(searchQuery: string) {
-    const url = `${this.baseUrl}/employees/search`;
+  searchEmployee(searchQuery: string,pageDto:PageDto) {
+    const url = `${this.baseUrl}/employees/${searchQuery}/${pageDto.offset}/${pageDto.field}/${pageDto.direction}`;
     const jwtToken = localStorage.getItem('token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${jwtToken}`);
-    return this.http.post<any>(url, searchQuery, {headers});
+    return this.http.get<any>(url, {headers});
   }
 
   getEmployeeById(employeeId: any) {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../../services/auth.service";
 import {EmployeeService} from "../../services/employee.service";
 import {Router} from "@angular/router";
@@ -9,26 +9,21 @@ import {PageDto} from "../../models/page-dto";
   templateUrl: './employees-list.component.html',
   styleUrls: ['./employees-list.component.css']
 })
-export class EmployeesListComponent {
-  page:any={}
+export class EmployeesListComponent implements OnInit {
   pageDto:PageDto=new PageDto();
-  totalEmployees: number=0;
+  totalEmployees: number = 0;
   searchQuery: string="";
   employees: any=[];
   p:  number = 1;
+  isRefreshed = false;
 
   constructor(private authService: AuthService, private employeeService: EmployeeService,private router:Router) {
-    this.page = {
-      id:"basicPaginate",
-      itemsPerPage: this.pageDto.itemsPerPage,
-      currentPage: this.p,
-      totalItems: this.countEmployees()
-    }
+
   }
 
   ngOnInit() {
-    this.employeesCount()
-    this.loadEmployees()
+    this.employeesCount();
+    this.loadEmployees();
   }
 
 
@@ -43,7 +38,7 @@ export class EmployeesListComponent {
           if (response) {
             this.employees = response;
             console.log(this.employees);
-            this.totalEmployees = this.countEmployees()
+            // this.totalEmployees = this.countEmployees()
           } else {
             console.error('Failed to retrieve Employee details:', response.msg);
           }
@@ -60,11 +55,13 @@ export class EmployeesListComponent {
   searchEmployees(){
     if(this.searchQuery !== "") {
       console.log(this.searchQuery)
-      this.employees = this.employeeService.searchEmployee(this.searchQuery).subscribe(
+      this.employees = this.employeeService.searchEmployee(this.searchQuery,this.pageDto).subscribe(
         response => {
           console.log("jwt - " + localStorage.getItem("token"))
           if (response) {
-            this.employees = response;
+            console.log(response);
+            this.employees = response.employees;
+            this.totalEmployees = response.size;
           } else {
             console.error('Failed to retrieve Employee details:', response.msg);
           }
@@ -75,15 +72,6 @@ export class EmployeesListComponent {
     }else {
       this.loadEmployees()
     }
-  }
-
-   countEmployees() {
-     var count = 0;
-
-    for(let employee in this.employees) {
-      ++count;
-    }
-    return count;
   }
 
   viewEmployee(id:number){
@@ -97,8 +85,10 @@ export class EmployeesListComponent {
   }
 
   private employeesCount() {
+    // this.isRefreshed = false;
     this.employeeService.getTotalEmployees().subscribe(response => {
-      this.totalEmployees = response
+      this.totalEmployees = response;
+      // setTimeout(() => this.isRefreshed = true);
       console.log(response)
     })
   }

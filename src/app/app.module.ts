@@ -13,6 +13,10 @@ import { ViewComponent } from './components/view/view.component';
 import {NgxPaginationModule} from "ngx-pagination";
 import { AddEmployeeComponent } from './components/add-employee/add-employee.component';
 import { EditComponent } from './components/edit/edit.component';
+import { LeaveComponent } from './components/leave/leave.component';
+import { HolidayComponent } from './components/holiday/holiday.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +26,10 @@ import { EditComponent } from './components/edit/edit.component';
     ViewComponent,
     AddEmployeeComponent,
     EditComponent,
-
+    LeaveComponent,
+    HolidayComponent,
+    DashboardComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,8 +41,10 @@ import { EditComponent } from './components/edit/edit.component';
     NgxPaginationModule,
 
   ],
-  providers: [
-
+  providers: [],
+  exports: [
+    LeaveComponent,
+    NavbarComponent
   ],
   bootstrap: [AppComponent]
 })
