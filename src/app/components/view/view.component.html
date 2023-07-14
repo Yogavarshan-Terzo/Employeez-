@@ -1,0 +1,50 @@
+<div class="alert alert-danger" *ngIf="errorMessage !== ''">{{ errorMessage }}!!</div>
+<div class="table-responsive">
+  <table class="table caption-top" *ngIf="employee">
+      <caption>Employee Detail</caption>
+      <thead>
+      <tr>
+        <th scope="col">Info-type</th>
+        <th scope="col">Details</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>Name</td>
+        <td *ngIf="employee.firstname">{{employee?.firstname+" "+employee.lastname}}</td>
+      </tr>
+      <tr>
+        <td>Email</td>
+        <td>{{employee.email}}</td>
+      </tr>
+      <tr>
+        <td>Mobile</td>
+        <td>{{employee.mobile}}</td>
+      </tr>
+      <tr>
+        <td>Designation</td>
+        <td>{{employee.designation}}</td>
+      </tr>
+      <tr>
+        <td>Department</td>
+        <td>{{employee.department.name}}</td>
+      </tr>
+      <tr>
+        <td>Date of Birth</td>
+        <td>{{employee.dateOfBirth}}</td>
+      </tr>
+      <tr>
+        <td>Joined On</td>
+        <td>{{employee.joinedOn}}</td>
+      </tr>
+      <tr>
+        <td>Report to</td>
+        <td *ngIf="reportTo">{{reportTo?.firstname}}</td>
+        <td *ngIf="reportToErrorMessage !== ''">{{reportToErrorMessage}}</td>
+      </tr>
+      <tr *ngIf="isAdmin">
+        <td><a (click)="editEmployee(employee.id)" *ngIf="isAdmin" class="btn btn-primary button">Edit</a></td>
+      </tr>
+      </tbody>
+  </table>
+</div>

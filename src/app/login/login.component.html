@@ -1,0 +1,13 @@
+<form>
+  <div>User Login</div>
+  <div>Email</div>
+  <input class="input-box" type="email" placeholder="Email" name="email" required [(ngModel)]="loginModel.email">
+  <div>Password</div>
+  <input class="input-box" type="password" placeholder="Password" name="password" required [(ngModel)]="loginModel.password">
+  <div>
+    <div class="alert alert-danger" *ngIf="errorMessage !== ''">{{ errorMessage }}!!</div>
+    <button class="submit-button" (click)="proceedLogin()" type="submit">
+      Login
+    </button>
+  </div>
+</form>

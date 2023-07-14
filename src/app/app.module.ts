@@ -12,6 +12,7 @@ import {FormsModule} from "@angular/forms";
 import { ViewComponent } from './components/view/view.component';
 import {NgxPaginationModule} from "ngx-pagination";
 import { AddEmployeeComponent } from './components/add-employee/add-employee.component';
+import { EditComponent } from './components/edit/edit.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { AddEmployeeComponent } from './components/add-employee/add-employee.com
     EmployeesListComponent,
     ViewComponent,
     AddEmployeeComponent,
+    EditComponent,
 
   ],
   imports: [
@@ -29,7 +31,8 @@ import { AddEmployeeComponent } from './components/add-employee/add-employee.com
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+
   ],
   providers: [
 
@@ -37,3 +40,4 @@ import { AddEmployeeComponent } from './components/add-employee/add-employee.com
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

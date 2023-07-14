@@ -1,0 +1,20 @@
+*{
+  font-family: "Comic Sans MS";
+}
+.input-box{
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.submit-button{
+  color: white;
+  background-color: blueviolet;
+  border-radius: 5px;
+  width: 50%;
+  padding: 12px 20px;
+  margin: 8px 0;
+}

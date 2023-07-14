@@ -1,0 +1,42 @@
+
+  <input  class="search-box" style="width: 20rem" type="text" [(ngModel)]="searchQuery" (change)="searchEmployees()" placeholder="Search...">
+  <button  class="btn-primary button" (click)="searchEmployees()">Search</button>
+  <div class="container-fluid">
+ <div class="input-group mb-3">
+    <label>Sort Order</label>
+    <div class="input-group-prepend custom-select">
+      <label class="input-group-text" for="department">Choose</label>
+    </div>
+    <select class="custom-select" id="department" name="department" (change)="loadEmployees()" [(ngModel)]="pageDto.direction" >
+      <option  value="ASC">Ascending</option>
+      <option value="DESC">Descending</option>
+    </select>
+  </div>
+  <div class="input-group mb-3">
+    <label>Sort By</label>
+    <div class="input-group-prepend custom-select">
+      <label class="input-group-text" for="field">Choose</label>
+    </div>
+    <select class="custom-select" id="field" name="field" (change)="loadEmployees()" [(ngModel)]="pageDto.field" >
+      <option value="firstname">Name</option>
+      <option value="joinedOn">Joining Date</option>
+    </select>
+  </div>
+</div>
+<div class="message" *ngIf="totalEmployees===0">No Employees Found</div>
+<div style="margin-top: 20px" class="row row-cols-1 row-cols-md-3 g-4">
+  <div *ngFor="let employee of employees | paginate :{itemsPerPage:pageDto.itemsPerPage,currentPage:p,totalItems:6}" class="col">
+    <div class="card" style="width: 18rem;">
+      <img src="{{employee.photoUrl}}" class="rounded" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">{{employee.firstname}}</h5>
+        <p class="card-text">{{employee.designation}}</p>
+        <p class="card-text">{{employee.department.name}}</p>
+        <a (click)="viewEmployee(employee.id)" class="btn btn-primary button">View</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="pagination-buttons">  <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
+</div>
+

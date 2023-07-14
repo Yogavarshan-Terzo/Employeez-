@@ -1,0 +1,86 @@
+<div class="alert alert-danger" *ngIf="errorMessage !== ''">{{ errorMessage }}!!</div>
+<div class="form-group mb-3">
+    <label for="firstname">First Name</label>
+    <input type="text" class="form-control" id="firstname" name="firstname" [(ngModel)]="registerDto.firstname">
+  </div>
+  <div class="form-group mb-3">
+    <label for="lastname">Last Name</label>
+    <input type="text" class="form-control" id="lastname" name="lastname" [(ngModel)]="registerDto.lastname">
+  </div>
+  <div class="form-group mb-3">
+    <label for="email">Email</label>
+    <input type="email" class="form-control" placeholder="Email" id="email" name="email" [(ngModel)]="registerDto.email">
+  </div>
+  <div class="form-group mb-3">
+    <label for="mobile">Mobile number</label>
+    <input type="text" class="form-control" id="mobile" placeholder="Mobile no." name="mobile" [(ngModel)]="registerDto.mobile">
+  </div>
+  <div class="form-group mb-3">
+    <label for="dateOfBirth">Date of Birth</label>
+    <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth" [(ngModel)]="registerDto.dateOfBirth">
+  </div>
+  <div class="form-group mb-3">
+    <label for="address">Address</label>
+    <input type="text" class="form-control" placeholder="Address" id="address" name="addres" [(ngModel)]="registerDto.address">
+  </div>
+  <div class="form-group mb-3">
+    <label for="joinedOn">Joined On</label>
+    <input type="date" class="form-control" id="joinedOn" name="joinedOn" [(ngModel)]="registerDto.joinedOn">
+  </div>
+  <div class="form-group mb-3">
+    <label for="designation">Designation</label>
+    <input type="text" class="form-control" id="designation" name="designation" [(ngModel)]="registerDto.designation">
+  </div>
+  <div class="input-group mb-3">
+    <label>Department</label>
+    <div class="input-group-prepend custom-select">
+      <label class="input-group-text" for="department">Choose</label>
+    </div>
+    <select class="custom-select" id="department" name="department" [(ngModel)]="registerDto.deptId" >
+      <option value="1">Engineering</option>
+      <option value="2">Sales</option>
+    </select>
+  </div>
+  <div class="form-group mb-3">
+    <label for="password">Password</label>
+    <input type="password" class="form-control" id="password" name="password" [(ngModel)]="registerDto.password">
+  </div>
+  <div class="form-group mb-3">
+    <label for="confirmPassword">Confirm Password</label>
+    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" [(ngModel)]="confirmPassword">
+  </div>
+  <div class="form-group mb-3">
+    <label for="photoUrl">Photo Url</label>
+    <input type="text" class="form-control" [(ngModel)]="registerDto.photoUrl" id="photoUrl"  rows="3">
+  </div>
+<!--  <div>-->
+<!--    `<input type="file" ng2FileSelect [uploader]="uploader" />`-->
+<!--    `<button [disabled]="loading" (click)="upload()" class="btn">Upload</button>`-->
+<!--  </div>-->
+
+  <div class="input-group mb-3">
+    <label>Team</label>
+    <div class="input-group-prepend custom-select">
+      <label class="input-group-text" for="team">Choose</label>
+    </div>
+    <select class="custom-select" id="team" name="team" [(ngModel)]="registerDto.teamId" >
+      <option value="1">QA</option>
+      <option value="2">Developer</option>
+      <option value="2">Platforms</option>
+    </select>
+  </div>
+  <div class="input-group mb-3">
+    <label>Role</label>
+    <div class="input-group-prepend custom-select">
+      <label class="input-group-text" for="role">Choose</label>
+    </div>
+    <select class="custom-select" id="role" name="role" [(ngModel)]="registerDto.roleId" >
+      <option value="1">EMPLOYEE</option>
+      <option value="2">MANAGER</option>
+      <option value="2">ADMIN</option>
+    </select>
+  </div>
+  <button class="submit-button" (click)="addEmployee()" type="submit">
+    Add
+  </button>
+
