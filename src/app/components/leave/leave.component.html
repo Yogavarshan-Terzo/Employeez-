@@ -1,21 +1,22 @@
-<div class="card" style="font-family: 'Comic Sans MS';width: 100%">
+<div class="card">
   <div class="card-header">
-    Apply Leave
+    Apply Time Off
   </div>
   <div class="card-body">
-    <h5 class="card-title">Special title treatment</h5>
-    <table class="table-bordered" style="border: black 1px" >
-      <tr class="table-bordered">
-        <td class="border-black">Sick</td>
-        <td>Earned</td>
-        <td>Paternity</td>
-      </tr>
-    </table>
-    <p class="card-text"></p>
-    <div class="form-group mb-3">
-      <label for="designation">Designation</label>
-      <input type="text" class="form-control" id="designation" name="designation" [(ngModel)]="applyLeaveDto">
+    <div class="form-group">
+      <label style="margin-bottom: 5px">Apply For</label>
+      <select class="custom-select form-select" id="leave-type" name="leave-type"  >
+        <option value="firstname">Sick</option>
+        <option value="joinedOn">Earned</option>
+        <option value="joinedOn">Paternity</option>
+      </select>
     </div>
-    <a (click)="applyLeave()" class="btn btn-primary">Apply</a>
+    <div class="form-group">
+      <label style="margin: 0px 0px 5px">Apply on</label>
+      <input type="date" class="form-control" id="leave-date" name="leave-date" >
+    </div>
+    <div style="margin-top: 15px;">
+      <a (click)="applyLeave()" class="btn btn-primary button">Proceed</a>
+    </div>
   </div>
 </div>

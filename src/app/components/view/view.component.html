@@ -37,14 +37,19 @@
         <td>Joined On</td>
         <td>{{employee.joinedOn}}</td>
       </tr>
-      <tr>
+      <tr *ngIf="reportTo">
         <td>Report to</td>
         <td *ngIf="reportTo">{{reportTo?.firstname}}</td>
         <td *ngIf="reportToErrorMessage !== ''">{{reportToErrorMessage}}</td>
       </tr>
-      <tr *ngIf="isAdmin">
-        <td><a (click)="editEmployee(employee.id)" *ngIf="isAdmin" class="btn btn-primary button">Edit</a></td>
+      <tr>
+        <td>
+          <a *ngIf="isAdmin" (click)="editEmployee(employee.id)" class="btn btn-primary button">Edit</a>
+          <button (click)="deleteEmployee(employee.id)" class="btn btn-danger button">Delete</button>
+          <a *ngIf="isAdmin" (click)="goBack()" class="btn btn-secondary button">Back</a>
+        </td>
       </tr>
+
       </tbody>
   </table>
 </div>

@@ -1,23 +1,25 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {EmployeeService} from "../../services/employee.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import {AuthService} from "../../services/auth.service";
-
+import {Location} from "@angular/common"
 @Component({
   selector: 'app-view',
   templateUrl: './view.component.html',
   styleUrls: ['./view.component.css']
 })
-export class ViewComponent {
+export class ViewComponent implements OnInit{
   employee:any;
   reportTo:any;
   errorMessage="";
   reportToErrorMessage = "";
    isAdmin:Boolean=false;
+   isEmployee:Boolean=true;
 
   constructor(private route:ActivatedRoute,private employeeServie : EmployeeService,private authService: AuthService,
-              private router:Router) {
+              private router:Router,
+              private location:Location) {
   }
   ngOnInit(){
     let employeeId = this.route.snapshot.params['id']
@@ -52,5 +54,13 @@ export class ViewComponent {
 
   editEmployee(id:number) {
     this.router.navigate([`/employees/edit/${id}`])
+  }
+
+  goBack() {
+    this.location.back();
+  }
+
+  deleteEmployee(id:number) {
+
   }
 }

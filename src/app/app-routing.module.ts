@@ -7,6 +7,8 @@ import {AddEmployeeComponent} from "./components/add-employee/add-employee.compo
 import {EditComponent} from "./components/edit/edit.component";
 import {AdminAuthGuardService} from "./services/admin-auth-guard.service";
 import {DashboardComponent} from "./components/dashboard/dashboard.component";
+import {ProfileComponent} from "./components/profile/profile.component";
+import {LoginGuardService} from "./services/login-guard.service";
 
 const routes: Routes = [
   {path:"login", component: LoginComponent},
@@ -14,7 +16,8 @@ const routes: Routes = [
   {path:"employees",component: EmployeesListComponent},
   {path:"view/:id",component:ViewComponent},
   {path:"employees/edit/:id",component:EditComponent,canActivate:[AdminAuthGuardService]},
-  {path:"employees/add",component:AddEmployeeComponent,canActivate:[AdminAuthGuardService]}
+  {path:"employees/add",component:AddEmployeeComponent,canActivate:[AdminAuthGuardService]},
+  {path:"profile",component:ProfileComponent,canActivate:[LoginGuardService]}
 ];
 
 @NgModule({

@@ -3,21 +3,39 @@
 </div>
 <div class="row">
   <app-leave></app-leave>
+</div>
+<div class="row">
+  <div class="column">
+      <div class="card">
+        <div class="card-header">
+          Upcoming Holidays
+        </div>
+      <table class="table" *ngIf="dashBoardDto.holidays">
+        <thead>
+        <tr>
+          <th scope="col">Holiday</th>
+          <th scope="col">Date</th>
+          <th scope="col">Note</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let holiday of dashBoardDto.holidays">
+          <td>{{holiday.name}}</td>
+          <td>{{holiday.date}}</td>
+          <td>{{holiday.note}}</td>
+        </tr>
+        </tbody>
+      </table>
+      <div class="text-center" >
+        <a routerLink="" class="text-primary">View Holiday calendar</a>
+      </div>
+    </div>
+  </div>
+  <div class="column">
+    <app-leave></app-leave>
+  </div>
+</div>
+<div class="row">
   <app-leave></app-leave>
-  <div class="column">
-
-  </div>
-
-  <div class="column">
-
-  </div>
-
-  <div class="column">
-
-  </div>
-
-  <div class="column">
-
-  </div>
 </div>
 

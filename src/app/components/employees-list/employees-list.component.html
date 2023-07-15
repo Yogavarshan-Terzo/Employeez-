@@ -1,28 +1,34 @@
-
-  <input  class="search-box" style="width: 20rem" type="text" [(ngModel)]="searchQuery" (change)="searchEmployees()" placeholder="Search...">
-  <button  class="btn-primary button" (click)="searchEmployees()">Search</button>
-  <div class="container-fluid">
- <div class="input-group mb-3">
-    <label>Sort Order</label>
-    <div class="input-group-prepend custom-select">
-      <label class="input-group-text" for="department">Choose</label>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <div class="form-group mb-3">
+        <label>Sort By</label>
+        <select class="custom-select form-select" id="field" name="field" (change)="loadEmployees()" [(ngModel)]="pageDto.field">
+          <option value="firstname">Name</option>
+          <option value="joinedOn">Joining Date</option>
+        </select>
+      </div>
     </div>
-    <select class="custom-select" id="department" name="department" (change)="loadEmployees()" [(ngModel)]="pageDto.direction" >
-      <option  value="ASC">Ascending</option>
-      <option value="DESC">Descending</option>
-    </select>
-  </div>
-  <div class="input-group mb-3">
-    <label>Sort By</label>
-    <div class="input-group-prepend custom-select">
-      <label class="input-group-text" for="field">Choose</label>
+    <div class="col">
+      <div class="form-group mb-3">
+        <label>Sort Order</label>
+        <select class="custom-select form-select" id="department" name="department" (change)="loadEmployees()" [(ngModel)]="pageDto.direction">
+          <option value="ASC">Ascending</option>
+          <option value="DESC">Descending</option>
+        </select>
+      </div>
     </div>
-    <select class="custom-select" id="field" name="field" (change)="loadEmployees()" [(ngModel)]="pageDto.field" >
-      <option value="firstname">Name</option>
-      <option value="joinedOn">Joining Date</option>
-    </select>
+    <div class="col" style="padding-top:23px;">
+      <div class="form-group" >
+        <div class="d-flex">
+          <input class="search-box form-control" style="width: 20rem" type="text" [(ngModel)]="searchQuery" (change)="searchEmployees()" placeholder="Search...">
+          <button class="btn btn-primary ml-2 button" (click)="searchEmployees()">Search</button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+
 <div class="message" *ngIf="totalEmployees===0">No Employees Found</div>
 <div style="margin-top: 20px" class="row row-cols-1 row-cols-md-3 g-4">
   <div *ngFor="let employee of employees | paginate :{itemsPerPage:pageDto.itemsPerPage,currentPage:p,totalItems:totalEmployees}" class="col">

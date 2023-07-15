@@ -67,4 +67,58 @@ export class EmployeeService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${jwtToken}`);
     return this.http.get<any>(url,{headers});
   }
+
+  getDashboardDto() {
+    const url = `${this.baseUrl}/dashboard`;
+    const jwtToken = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${jwtToken}`);
+    return this.http.get<any>(url,{headers});
+  }
+
+  fetchManagers() {
+     let managers:any=[];
+    if(localStorage.getItem("managers")){
+      managers = localStorage.getItem("managers")
+    }
+     else{
+       const url = `${this.baseUrl}/managers`;
+      const jwtToken = localStorage.getItem('token');
+      const headers = new HttpHeaders().set('Authorization', `Bearer ${jwtToken}`);
+      this.http.get<any>(url,{headers}).subscribe(response => {
+        managers = JSON.stringify(response);
+        localStorage.setItem("managers",managers);
+      });
+    }return managers;
+     }
+
+
+  fetchDepartments() {
+     let departments:any=[];
+     if(localStorage.getItem("departments")){
+       departments = localStorage.getItem("departments");
+     }else{
+       const url = `${this.baseUrl}/department`;
+       const jwtToken = localStorage.getItem('token');
+       const headers = new HttpHeaders().set('Authorization', `Bearer ${jwtToken}`);
+       this.http.get<any>(url,{headers}).subscribe(response => {
+         departments = JSON.stringify(response);
+         localStorage.setItem("departments",departments);
+       });
+     }return departments;
+  }
+  fetchTeams() {
+     let teams:any=[];
+    if(localStorage.getItem("teams")){
+      teams = localStorage.getItem("teams")
+    }else {
+      const url = `${this.baseUrl}/teams`;
+      const jwtToken = localStorage.getItem('token');
+      const headers = new HttpHeaders().set('Authorization', `Bearer ${jwtToken}`);
+       this.http.get<any>(url, {headers}).subscribe(response => {
+        teams = JSON.stringify(response);
+        localStorage.setItem("teams", teams);
+      });
+      return teams;
+    }
+  }
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {RegisterDto} from "../../models/register-dto.model";
 import {EmployeeService} from "../../services/employee.service";
 import {Router} from "@angular/router";
@@ -8,10 +8,13 @@ import {HttpErrorResponse} from "@angular/common/http";
   templateUrl: './add-employee.component.html',
   styleUrls: ['./add-employee.component.css']
 })
-export class AddEmployeeComponent {
+export class AddEmployeeComponent implements OnInit{
   confirmPassword:string=""
   registerDto:RegisterDto=new RegisterDto();
   errorMessage:string="";
+  departments:any = [];
+  managers:any=[];
+  teams:any=[];
   constructor(private employeeService:EmployeeService,private router:Router) {
   }
   addEmployee() {
@@ -26,7 +29,22 @@ export class AddEmployeeComponent {
         console.error('An error occurred:', error);
       }
     });
-
     this.router.navigate(["/employees"])
+  }
+
+  ngOnInit(): void {
+    this.fetchDepartments();
+    this.fetchManagers();
+    this.fetchTeams();
+  }
+  fetchDepartments(){
+     this.departments = this.employeeService.fetchDepartments();
+     console.log(this.departments)
+  }
+  fetchManagers(){
+    this.managers = this.employeeService.fetchManagers();
+  }
+  fetchTeams(){
+    this.teams = this.employeeService.fetchTeams();
   }
 }

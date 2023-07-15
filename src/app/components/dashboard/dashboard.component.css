@@ -1,7 +1,15 @@
 * {
   box-sizing: border-box;
+  font-family: "Comic Sans MS";
 }
-
+.button{
+  height: 38px;
+  border-radius: 3px;
+  border: none;
+  margin-right: 50px;
+  background-color:blueviolet;
+  color:white;
+}
 body {
   margin: 0;
   font-family: Arial;
@@ -15,14 +23,18 @@ body {
 .row {
   display: flex;
   flex-wrap: wrap;
-  padding: 0 4px;
+  width: 1000px;
+  padding: 0 4px 10px;
+  margin-bottom: 10px;
+  margin-top: 10px;
 }
 
 /* Create four equal columns that sits next to each other */
 .column {
-  flex: 25%;
-  max-width: 25%;
+  flex: 40%;
+  max-width: 50%;
   padding: 0 4px;
+  margin-bottom: 10px;
 }
 
 .column img {

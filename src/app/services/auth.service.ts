@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {from, Observable} from "rxjs";
 import {Router} from "@angular/router";
@@ -7,20 +7,20 @@ import {JwtHelperService} from "@auth0/angular-jwt";
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthService implements OnInit{
    jwtHelper = new JwtHelperService();
   constructor(private http:HttpClient,private router:Router) { }
   baseUrl:string="http://localhost:8080/"
   proceedLogin(loginDto:any):Observable<any> {
     return this.http.post(`${this.baseUrl}login`, loginDto);
   }
-
   ngOnInit(){
     this.isAdmin()
     this.isLoggedIn()
   }
   logout(){
     localStorage.removeItem("token");
+    localStorage.clear();
     this.router.navigate(["login"]).then(() => {window.location.reload()});
   }
 

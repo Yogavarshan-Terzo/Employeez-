@@ -75,9 +75,9 @@
       <label class="input-group-text" for="role">Choose</label>
     </div>
     <select class="custom-select" id="role" name="role" [(ngModel)]="registerDto.roleId" >
-      <option value="1">EMPLOYEE</option>
+      <option value="1">ADMIN</option>
       <option value="2">MANAGER</option>
-      <option value="2">ADMIN</option>
+      <option value="2">EMPLOYEE</option>
     </select>
   </div>
   <button class="submit-button" (click)="addEmployee()" type="submit">
