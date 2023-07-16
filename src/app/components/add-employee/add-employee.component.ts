@@ -3,6 +3,7 @@ import {RegisterDto} from "../../models/register-dto.model";
 import {EmployeeService} from "../../services/employee.service";
 import {Router} from "@angular/router";
 import {HttpErrorResponse} from "@angular/common/http";
+import {readSpanComment} from "@angular/compiler-cli/src/ngtsc/typecheck/src/comments";
 @Component({
   selector: 'app-add-employee',
   templateUrl: './add-employee.component.html',
@@ -12,9 +13,9 @@ export class AddEmployeeComponent implements OnInit{
   confirmPassword:string=""
   registerDto:RegisterDto=new RegisterDto();
   errorMessage:string="";
-  departments:any = [];
-  managers:any=[];
-  teams:any=[];
+  departments:any[] = [];
+  managers:any[]=[];
+  teams:any[]=[];
   constructor(private employeeService:EmployeeService,private router:Router) {
   }
   addEmployee() {
@@ -38,13 +39,14 @@ export class AddEmployeeComponent implements OnInit{
     this.fetchTeams();
   }
   fetchDepartments(){
-     this.departments = this.employeeService.fetchDepartments();
-     console.log(this.departments)
+     this.departments = JSON.parse(this.employeeService.fetchDepartments());
   }
   fetchManagers(){
-    this.managers = this.employeeService.fetchManagers();
+    this.managers = JSON.parse(this.employeeService.fetchManagers());
   }
   fetchTeams(){
-    this.teams = this.employeeService.fetchTeams();
+    this.employeeService.fetchTeams().subscribe(response => {
+      this.teams = response;
+    });
   }
 }

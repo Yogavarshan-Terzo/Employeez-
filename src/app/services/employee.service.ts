@@ -107,18 +107,47 @@ export class EmployeeService {
      }return departments;
   }
   fetchTeams() {
-     let teams:any=[];
-    if(localStorage.getItem("teams")){
-      teams = localStorage.getItem("teams")
-    }else {
       const url = `${this.baseUrl}/teams`;
       const jwtToken = localStorage.getItem('token');
       const headers = new HttpHeaders().set('Authorization', `Bearer ${jwtToken}`);
-       this.http.get<any>(url, {headers}).subscribe(response => {
-        teams = JSON.stringify(response);
-        localStorage.setItem("teams", teams);
+       return this.http.get<any>(url, {headers});
+  }
+
+  deleteEmployee(id: number) {
+     console.log("id for delete :"+id)
+    const url = `${this.baseUrl}/employees/${id}`;
+    const jwtToken = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${jwtToken}`);
+    return this.http.delete<any>(url, {headers});
+  }
+
+  getProfileDto() {
+    let profileDto:any=[];
+    if(localStorage.getItem("profileDto")){
+      profileDto = localStorage.getItem("profileDto");
+    }else{
+      const url = `${this.baseUrl}/profileDto`;
+      const jwtToken = localStorage.getItem('token');
+      const headers = new HttpHeaders().set('Authorization', `Bearer ${jwtToken}`);
+      this.http.get<any>(url,{headers}).subscribe(response => {
+        profileDto = JSON.stringify(response);
+        localStorage.setItem("profileDto",profileDto);
       });
-      return teams;
-    }
+    }return profileDto;
+  }
+
+  getProfileDetails() {
+    let profileDetails:any=[];
+    if(localStorage.getItem("profileDetails")){
+      profileDetails = localStorage.getItem("profileDetails");
+    }else{
+      const url = `${this.baseUrl}/employees/profileDetails`;
+      const jwtToken = localStorage.getItem('token');
+      const headers = new HttpHeaders().set('Authorization', `Bearer ${jwtToken}`);
+      this.http.get<any>(url,{headers}).subscribe(response => {
+        profileDetails = JSON.stringify(response);
+        localStorage.setItem("profileDetails",profileDetails);
+      });
+    }return profileDetails;
   }
 }

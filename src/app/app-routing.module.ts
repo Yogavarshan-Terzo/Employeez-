@@ -9,6 +9,7 @@ import {AdminAuthGuardService} from "./services/admin-auth-guard.service";
 import {DashboardComponent} from "./components/dashboard/dashboard.component";
 import {ProfileComponent} from "./components/profile/profile.component";
 import {LoginGuardService} from "./services/login-guard.service";
+import {UpdateComponent} from "./components/update/update.component";
 
 const routes: Routes = [
   {path:"login", component: LoginComponent},
@@ -17,7 +18,9 @@ const routes: Routes = [
   {path:"view/:id",component:ViewComponent},
   {path:"employees/edit/:id",component:EditComponent,canActivate:[AdminAuthGuardService]},
   {path:"employees/add",component:AddEmployeeComponent,canActivate:[AdminAuthGuardService]},
-  {path:"profile",component:ProfileComponent,canActivate:[LoginGuardService]}
+  {path:"profile",component:ProfileComponent,canActivate:[LoginGuardService]},
+  {path:"profile/editInfo",component:UpdateComponent,canActivate:[LoginGuardService]}
+
 ];
 
 @NgModule({

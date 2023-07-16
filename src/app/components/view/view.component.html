@@ -45,8 +45,8 @@
       <tr>
         <td>
           <a *ngIf="isAdmin" (click)="editEmployee(employee.id)" class="btn btn-primary button">Edit</a>
-          <button (click)="deleteEmployee(employee.id)" class="btn btn-danger button">Delete</button>
-          <a *ngIf="isAdmin" (click)="goBack()" class="btn btn-secondary button">Back</a>
+          <button *ngIf="isAdmin" (click)="deleteEmployee(employee.id)" class="btn btn-danger button">Delete</button>
+          <a  (click)="goBack()" class="btn btn-secondary button">Back</a>
         </td>
       </tr>
 

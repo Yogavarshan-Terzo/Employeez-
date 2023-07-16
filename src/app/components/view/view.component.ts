@@ -61,6 +61,8 @@ export class ViewComponent implements OnInit{
   }
 
   deleteEmployee(id:number) {
-
+    this.employeeServie.deleteEmployee(id).subscribe(response => console.log(response));
+    alert("Employee Deleted successfully");
+    this.router.navigate([this.location.back()])
   }
 }

@@ -36,7 +36,12 @@ body {
   padding: 0 4px;
   margin-bottom: 10px;
 }
-
+.column-tab{
+  flex: 40%;
+  max-width: 100%;
+  padding: 0 4px;
+  margin-bottom: 10px;
+}
 .column img {
   margin-top: 8px;
   vertical-align: middle;

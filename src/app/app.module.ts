@@ -17,6 +17,7 @@ import { LeaveComponent } from './components/leave/leave.component';
 import { HolidayComponent } from './components/holiday/holiday.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { UpdateComponent } from './components/update/update.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { ProfileComponent } from './components/profile/profile.component';
     HolidayComponent,
     DashboardComponent,
     ProfileComponent,
+    UpdateComponent,
   ],
   imports: [
     BrowserModule,

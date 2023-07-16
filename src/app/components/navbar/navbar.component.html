@@ -4,13 +4,13 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-      <a class="navbar-brand" href="#">Employeez</a>
+      <a class="navbar-brand" routerLink="dashboard">Employeez</a>
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link active toolbar-text" routerLink="dashboard" *ngIf="isLoggedIn" aria-current="page" >Dashboard</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active toolbar-text" routerLink="employees" *ngIf="isLoggedIn" aria-current="page" href="#">Co-workers</a>
+          <a class="nav-link active toolbar-text" routerLink="employees" *ngIf="isLoggedIn" aria-current="page" >Co-workers</a>
         </li>
         <li class="nav-item">
           <a class="nav-link active toolbar-text" *ngIf="isAdmin" aria-current="page" routerLink="employees/add">Add Employee</a>
@@ -18,12 +18,12 @@
       </ul>
       <form class="d-flex">
         <div class="nav-item">
-          <a class="nav-link active toolbar-text" aria-current="page" routerLink="profile">My Profile</a>
+          <a class="nav-link active toolbar-text" aria-current="page" *ngIf="isLoggedIn"  style="cursor: pointer;" (click)="goToProfile()">My Profile</a>
         </div>
       </form>
       <form class="d-flex">
         <div class="nav-item">
-        <a class="nav-link active toolbar-text" aria-current="page" (click)="logout()" routerLink="login">Logout</a>
+        <a class="nav-link active toolbar-text" *ngIf="isLoggedIn" aria-current="page" (click)="logout()" routerLink="login">Logout</a>
         </div>
       </form>
     </div>

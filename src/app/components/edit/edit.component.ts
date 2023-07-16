@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UpdateDto} from "../../models/update-dto.model";
 import {ActivatedRoute, Router} from "@angular/router";
 import {getXHRResponse} from "rxjs/internal/ajax/getXHRResponse";
@@ -12,18 +12,24 @@ import {HttpErrorResponse} from "@angular/common/http";
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.css']
 })
-export class EditComponent {
+export class EditComponent implements OnInit{
   updateDto:UpdateDto = new UpdateDto();
   newPassword:string="";
   confirmPassword:string="";
   errorMessage:string="";
   employeeId:number=0;
   passwordErrorMessage:string="";
+  departments:any[] = [];
+  managers:any[]=[];
+  teams:any[]=[];
   constructor(private route:ActivatedRoute,
               private employeeService:EmployeeService,
               private router:Router) {
   }
   ngOnInit(){
+    this.fetchManagers();
+    this.fetchDepartments();
+    this.fetchTeams();
     this.employeeId = this.route.snapshot.params['id']
     this.employeeService.getEmployeeByIdForEdit(this.employeeId).subscribe(response => {
       this.updateDto = response
@@ -36,7 +42,6 @@ export class EditComponent {
       }
     });
   }
-
 
   updateEmployee() {
     if(this.newPassword !== ""){
@@ -62,4 +67,15 @@ export class EditComponent {
         }
       });
     }
+  fetchDepartments(){
+    this.departments = JSON.parse(this.employeeService.fetchDepartments());
+  }
+  fetchManagers(){
+    this.managers = JSON.parse(this.employeeService.fetchManagers());
+  }
+  fetchTeams(){
+    this.employeeService.fetchTeams().subscribe(response => {
+      this.teams = response;
+    });
+  }
 }

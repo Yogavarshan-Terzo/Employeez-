@@ -1,1 +1,182 @@
-<p>profile works!</p>
+<div class="container" style="width: 1000px">
+  <div class="main-body">
+    <div class="row gutters-sm">
+      <div class="col-md-4 mb-3">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex flex-column align-items-center text-center">
+              <img src="{{profileDto.photoUrl}}" alt="Admin" class="rounded" width="150">
+              <div class="mt-3">
+                <h4>{{profileDto.firstname}}</h4>
+                <p class="text-secondary mb-1">{{profileDto.designation}}</p>
+                <p class="text-muted font-size-sm">Employee Id :{{profileDto.id}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="card mb-3">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Full Name</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{profileDto.firstname}} {{profileDto.lastname}}
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Email</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{profileDto.email}}
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Mobile</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{profileDto.mobile}}
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Dept</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{profileDto.department}}
+              </div>
+            </div>
+            <hr>
+            <div *ngIf="profileDto.managerId !== 0">
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Direct manager</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  <a style="color: blue;cursor: pointer" (click)="viewEmployee(profileDto.managerId)">{{profileDto.managerName}}</a> ({{profileDto.managerDesignation}})
+                </div>
+              </div>
+              <hr>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link" [class.active]="activeTab === 'personal'" (click)="switchTab('personal')">Personal</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [class.active]="activeTab === 'job'" (click)="switchTab('job')">Job</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [class.active]="activeTab === 'education'" (click)="switchTab('education')">Education & Employment</a>
+      </li>
+    </ul>
+
+    <div class="row gutters-sm">
+      <div class="col-lg mb-3" *ngIf="activeTab === 'personal'">
+        <div class="card h-100">
+          <div class="card-body">
+            <div>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Full Name</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  {{profileDetails.firstname}} {{profileDetails.lastname}}
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Date of birth</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  {{profileDetails.dateOfBirth}}
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Address</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  {{profileDetails.address}}
+                </div>
+              </div>
+              <hr>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <a class="btn btn-info" routerLink="/profile/editInfo">Edit</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row gutters-sm">
+      <div class="col-lg mb-3" *ngIf="activeTab === 'job'">
+        <div class="card h-100">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Employee Id</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{profileDetails.id}}
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Date of Joining</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{profileDetails.joinedOn}}
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Designation</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{profileDetails.designation}}
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Department</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{profileDetails.department.name}}
+              </div>
+            </div>
+            <hr>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row gutters-sm">
+      <div class="col-lg mb-3" *ngIf="activeTab === 'education'">
+        <div class="card h-100">
+          <div class="card-body">
+            Employment & Education Details
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

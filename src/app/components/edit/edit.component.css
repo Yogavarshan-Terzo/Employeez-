@@ -6,3 +6,18 @@
   background-color:blueviolet;
   color:white;
 }
+.custom-select{
+  width: 100%;
+}
+input{
+  width: 100%;
+}
+.submit-button{
+  color: white;
+  background-color: blueviolet;
+  border-radius: 5px;
+  width: 50%;
+  padding: 12px 20px;
+  margin: 8px 0;
+}
+

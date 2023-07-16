@@ -1,22 +1,15 @@
-<div class="card">
-  <div class="card-header">
-    Apply Time Off
-  </div>
-  <div class="card-body">
-    <div class="form-group">
-      <label style="margin-bottom: 5px">Apply For</label>
-      <select class="custom-select form-select" id="leave-type" name="leave-type"  >
-        <option value="firstname">Sick</option>
-        <option value="joinedOn">Earned</option>
-        <option value="joinedOn">Paternity</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label style="margin: 0px 0px 5px">Apply on</label>
-      <input type="date" class="form-control" id="leave-date" name="leave-date" >
-    </div>
-    <div style="margin-top: 15px;">
-      <a (click)="applyLeave()" class="btn btn-primary button">Proceed</a>
-    </div>
-  </div>
+<div class="form-group">
+  <label style="margin-bottom: 5px">Apply For</label>
+  <select class="custom-select form-select" id="leave-type" name="leave-type"  >
+    <option value="firstname">Sick</option>
+    <option value="joinedOn">Earned</option>
+    <option value="joinedOn">Paternity</option>
+  </select>
+</div>
+<div class="form-group">
+  <label style="margin: 0px 0px 5px">Apply on</label>
+  <input type="date" class="form-control" id="leave-date" name="leave-date" >
+</div>
+<div style="margin-top: 15px;">
+  <a  class="btn btn-primary button">Proceed</a>
 </div>
