@@ -10,6 +10,7 @@ import {Location} from "@angular/common"
   styleUrls: ['./view.component.css']
 })
 export class ViewComponent implements OnInit{
+  activeTab = 'personal';
   employee:any;
   reportTo:any;
   errorMessage="";
@@ -24,10 +25,9 @@ export class ViewComponent implements OnInit{
   ngOnInit(){
     let employeeId = this.route.snapshot.params['id']
     this.employeeServie.getEmployeeById(employeeId).subscribe(response =>{
-      console.log(response);
       this.employee = response;
       this.isAdmin = this.authService.isAdmin();
-      this.findManager()
+      if(this.employee.reportTo !== 0)this.findManager();
     },error => {
       if (error instanceof HttpErrorResponse && error.status === 417 || error.status === 400 || error.status === 404 || error.status === 403) {
         this.errorMessage = "Employee Not Found!";
@@ -36,6 +36,10 @@ export class ViewComponent implements OnInit{
         console.error('An error occurred:', error);
       }
     });
+    console.log(this.employee)
+  }
+  switchTab(tab: string) {
+    this.activeTab = tab;
   }
 
   private findManager() {
@@ -64,5 +68,8 @@ export class ViewComponent implements OnInit{
     this.employeeServie.deleteEmployee(id).subscribe(response => console.log(response));
     alert("Employee Deleted successfully");
     this.router.navigate([this.location.back()])
+  }
+
+  viewEmployee(id: any) {
   }
 }

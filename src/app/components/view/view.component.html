@@ -1,55 +1,239 @@
-<div class="alert alert-danger" *ngIf="errorMessage !== ''">{{ errorMessage }}!!</div>
-<div class="table-responsive">
-  <table class="table caption-top" *ngIf="employee">
-      <caption>Employee Detail</caption>
-      <thead>
-      <tr>
-        <th scope="col">Info-type</th>
-        <th scope="col">Details</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr>
-        <td>Name</td>
-        <td *ngIf="employee.firstname">{{employee?.firstname+" "+employee.lastname}}</td>
-      </tr>
-      <tr>
-        <td>Email</td>
-        <td>{{employee.email}}</td>
-      </tr>
-      <tr>
-        <td>Mobile</td>
-        <td>{{employee.mobile}}</td>
-      </tr>
-      <tr>
-        <td>Designation</td>
-        <td>{{employee.designation}}</td>
-      </tr>
-      <tr>
-        <td>Department</td>
-        <td>{{employee.department.name}}</td>
-      </tr>
-      <tr>
-        <td>Date of Birth</td>
-        <td>{{employee.dateOfBirth}}</td>
-      </tr>
-      <tr>
-        <td>Joined On</td>
-        <td>{{employee.joinedOn}}</td>
-      </tr>
-      <tr *ngIf="reportTo">
-        <td>Report to</td>
-        <td *ngIf="reportTo">{{reportTo?.firstname}}</td>
-        <td *ngIf="reportToErrorMessage !== ''">{{reportToErrorMessage}}</td>
-      </tr>
-      <tr>
-        <td>
-          <a *ngIf="isAdmin" (click)="editEmployee(employee.id)" class="btn btn-primary button">Edit</a>
-          <button *ngIf="isAdmin" (click)="deleteEmployee(employee.id)" class="btn btn-danger button">Delete</button>
-          <a  (click)="goBack()" class="btn btn-secondary button">Back</a>
-        </td>
-      </tr>
+<a  (click)="goBack()" class="btn btn-secondary button">Back</a>
+<div class="container" style="width: 1000px">
+  <div class="main-body">
+    <div class="row gutters-sm">
+      <div class="col-md-4 mb-3">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex flex-column align-items-center text-center">
+              <img src="{{employee.photoUrl}}" alt="Admin" class="rounded" width="150">
+              <div class="mt-3">
+                <h4 *ngIf="employee.firstname">{{employee?.firstname}}</h4>
+                <p class="text-secondary mb-1">{{employee.designation}}</p>
+                <p class="text-muted font-size-sm">Employee Id :{{employee.id}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="card mb-3">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Full Name</h6>
+              </div>
+              <div class="col-sm-9 text-secondary"*ngIf="employee.firstname">{{employee?.firstname}} {{employee.lastname}}
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Email</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{employee.email}}
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Mobile</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{employee.mobile}}
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Dept</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{employee.department.name}}
+              </div>
+            </div>
+            <hr>
+            <div *ngIf="employee.reportTo !== 0">
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Direct manager</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  <a style="color: blue;cursor: pointer" (click)="viewEmployee(reportTo.id)" *ngIf="reportTo.firstname">{{reportTo?.firstname}}</a> ({{reportTo.designation}})
+                </div>
+              </div>
+              <hr>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link" [class.active]="activeTab === 'personal'" (click)="switchTab('personal')">Personal</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [class.active]="activeTab === 'job'" (click)="switchTab('job')">Job</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [class.active]="activeTab === 'education'" (click)="switchTab('education')">Education & Employment</a>
+      </li>
+    </ul>
 
-      </tbody>
-  </table>
+    <div class="row gutters-sm">
+      <div class="col-lg mb-3" *ngIf="activeTab === 'personal'">
+        <div class="card h-100">
+          <div class="card-body">
+            <div>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Full Name</h6>
+                </div>
+                <div class="col-sm-9 text-secondary"*ngIf="employee.firstname">{{employee?.firstname}}{{employee.lastname}}
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Date of birth</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  {{employee.dateOfBirth}}
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Address</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  {{employee.address}}
+                </div>
+              </div>
+              <hr>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row gutters-sm">
+      <div class="col-lg mb-3" *ngIf="activeTab === 'job'">
+        <div class="card h-100">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Employee Id</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{employee.id}}
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Date of Joining</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{employee.joinedOn}}
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Designation</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{employee.designation}}
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Department</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{employee.department.name}}
+              </div>
+            </div>
+            <hr>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row gutters-sm">
+      <div class="col-lg mb-3" *ngIf="activeTab === 'education'">
+        <div class="card h-100">
+          <div class="card-body">
+            Employment & Education Details
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+
+
+
+
+
+
+
+<!--<div class="alert alert-danger" *ngIf="errorMessage !== ''">{{ errorMessage }}!!</div>-->
+<!--<div class="table-responsive">-->
+<!--  <table class="table caption-top" *ngIf="employee">-->
+<!--      <caption>Employee Detail</caption>-->
+<!--      <thead>-->
+<!--      <tr>-->
+<!--        <th scope="col">Info-type</th>-->
+<!--        <th scope="col">Details</th>-->
+<!--      </tr>-->
+<!--      </thead>-->
+<!--      <tbody>-->
+<!--      <tr>-->
+<!--        <td>Name</td>-->
+<!--        <td *ngIf="employee.firstname">{{employee?.firstname+" "+employee.lastname}}</td>-->
+<!--      </tr>-->
+<!--      <tr>-->
+<!--        <td>Email</td>-->
+<!--        <td>{{employee.email}}</td>-->
+<!--      </tr>-->
+<!--      <tr>-->
+<!--        <td>Mobile</td>-->
+<!--        <td>{{employee.mobile}}</td>-->
+<!--      </tr>-->
+<!--      <tr>-->
+<!--        <td>Designation</td>-->
+<!--        <td>{{employee.designation}}</td>-->
+<!--      </tr>-->
+<!--      <tr>-->
+<!--        <td>Department</td>-->
+<!--        <td>{{employee.department.name}}</td>-->
+<!--      </tr>-->
+<!--      <tr>-->
+<!--        <td>Date of Birth</td>-->
+<!--        <td>{{employee.dateOfBirth}}</td>-->
+<!--      </tr>-->
+<!--      <tr>-->
+<!--        <td>Joined On</td>-->
+<!--        <td>{{employee.joinedOn}}</td>-->
+<!--      </tr>-->
+<!--      <tr *ngIf="reportTo">-->
+<!--        <td>Report to</td>-->
+<!--        <td *ngIf="reportTo">{{reportTo?.firstname}}</td>-->
+<!--        <td *ngIf="reportToErrorMessage !== ''">{{reportToErrorMessage}}</td>-->
+<!--      </tr>-->
+<!--      <tr>-->
+<!--        <td>-->
+<!--          <a *ngIf="isAdmin" (click)="editEmployee(employee.id)" class="btn btn-primary button">Edit</a>-->
+<!--          <button *ngIf="isAdmin" (click)="deleteEmployee(employee.id)" class="btn btn-danger button">Delete</button>-->
+<!--          <a  (click)="goBack()" class="btn btn-secondary button">Back</a>-->
+<!--        </td>-->
+<!--      </tr>-->
+
+<!--      </tbody>-->
+<!--  </table>-->
+<!--</div>-->
