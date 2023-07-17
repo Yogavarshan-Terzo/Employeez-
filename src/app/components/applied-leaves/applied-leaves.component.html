@@ -1,0 +1,29 @@
+<div class="card" style="width: 1000px">
+  <div class="card-header">
+    Upcoming Holidays
+  </div>
+  <table class="table" >
+    <thead>
+    <tr>
+      <th scope="col">Applied By</th>
+      <th scope="col">Applied On</th>
+      <th scope="col">Applied For</th>
+      <th scope="col">Note</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let appliedLeave of appliedLeaves" >
+      <td>{{appliedLeave.employeeDto.firstname}} ({{appliedLeave.employeeDto.department.name}})</td>
+      <td>{{appliedLeave.applyOn}}</td>
+      <td>{{appliedLeave.type}}</td>
+      <td>{{appliedLeave.note}}</td>
+      <td><button class="button" (click)="approveLeave(appliedLeave.id)" type="submit">
+        Approve
+      </button></td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="text-center" >
+
+  </div>
+</div>

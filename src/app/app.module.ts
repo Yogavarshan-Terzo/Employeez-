@@ -18,6 +18,7 @@ import { HolidayComponent } from './components/holiday/holiday.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { UpdateComponent } from './components/update/update.component';
+import { AppliedLeavesComponent } from './components/applied-leaves/applied-leaves.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { UpdateComponent } from './components/update/update.component';
     DashboardComponent,
     ProfileComponent,
     UpdateComponent,
+    AppliedLeavesComponent,
   ],
   imports: [
     BrowserModule,

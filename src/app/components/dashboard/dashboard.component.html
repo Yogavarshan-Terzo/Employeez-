@@ -1,5 +1,6 @@
 <div class="row">
-  <app-leave></app-leave>
+  Good Morning {{dashBoardDto.firstname}},<br>
+  It's {{day}}, {{currentMonth}} {{date}}
 </div>
 <div class="row">
   <div class="column">
@@ -34,7 +35,29 @@
         Upcoming Time Off
       </div>
       <div class="card-body">
-
+        <div *ngIf="!dashBoardDto.upcomingTimeOff">No time off applied</div>
+        <table class="table" *ngIf="dashBoardDto.upcomingTimeOff">
+          <thead>
+          <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Type</th>
+            <th scope="col">Note</th>
+            <th scope="col">Status</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let upcomingTimeOff of dashBoardDto.upcomingTimeOff">
+            <td>{{upcomingTimeOff.applyOn}}</td>
+            <td>{{upcomingTimeOff.type}}</td>
+            <td>{{upcomingTimeOff.note}}</td>
+            <td *ngIf="upcomingTimeOff.isApproved">Approved</td>
+            <td *ngIf="!upcomingTimeOff.isApproved">Applied</td>
+          </tr>
+          </tbody>
+        </table>
+        <div class="text-center" >
+          <a routerLink="/time-off/apply/{{dashBoardDto.employeeId}}/{{dashBoardDto.leaveInfo?.id}}" class="text-primary">Apply Time Off</a>
+        </div>
       </div>
     </div>
   </div>

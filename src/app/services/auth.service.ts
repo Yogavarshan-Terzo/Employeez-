@@ -44,6 +44,21 @@ export class AuthService implements OnInit{
     return false
   }
 
+  isManager(){
+    const token = localStorage.getItem("token");
+    let jwt : string="";
+    if(token){
+      jwt = token;
+    }else{
+      this.router.navigate(["/login"]);
+      return false
+    }
+    const decodedToken = this.jwtHelper.decodeToken(jwt);
+    const authority = decodedToken.roles[0].authority;
+    console.log(authority)
+    if(authority === "ROLE_MANAGER")return true;
+    return false
+  }
    getToken() {
     let token = localStorage.getItem("token");
     if(token){

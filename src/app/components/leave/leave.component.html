@@ -1,15 +1,24 @@
-<div class="form-group">
+<div class="form-group" style="width: 500px;">
   <label style="margin-bottom: 5px">Apply For</label>
-  <select class="custom-select form-select" id="leave-type" name="leave-type"  >
-    <option value="firstname">Sick</option>
-    <option value="joinedOn">Earned</option>
-    <option value="joinedOn">Paternity</option>
+  <select class="custom-select form-select" id="leave-type" [(ngModel)]="applyLeaveDto.type" name="leave-type"  >
+    <option value="1">Sick - {{leaveInfo?.sick}}</option>
+    <option value="2">Earned - {{leaveInfo?.earned}}</option>
+    <option value="3">Paternity - {{leaveInfo?.paternity}}</option>
   </select>
 </div>
+<br>
 <div class="form-group">
-  <label style="margin: 0px 0px 5px">Apply on</label>
-  <input type="date" class="form-control" id="leave-date" name="leave-date" >
+  <label style="margin: 0px 0px 5px">Select Time Off period</label>
+  <input type="date" [(ngModel)]="applyLeaveDto.applyOn" class="form-control" id="leave-start-date" name="leave-date" >
 </div>
+<br>
+<div class="form-group mb-3">
+  <label for="note">Note</label>
+  <input type="text" style="height: 80px;" class="form-control" id="note" name="note" [(ngModel)]="applyLeaveDto.note">
+</div>
+
 <div style="margin-top: 15px;">
-  <a  class="btn btn-primary button">Proceed</a>
+  <a  (click)="applyLeave()" class="btn btn-primary button">Apply</a>
+  <a  (click)="goBack()" class="btn btn-secondary button">Cancel</a>
 </div>
+

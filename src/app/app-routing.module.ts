@@ -10,6 +10,8 @@ import {DashboardComponent} from "./components/dashboard/dashboard.component";
 import {ProfileComponent} from "./components/profile/profile.component";
 import {LoginGuardService} from "./services/login-guard.service";
 import {UpdateComponent} from "./components/update/update.component";
+import {LeaveComponent} from "./components/leave/leave.component";
+import {AppliedLeavesComponent} from "./components/applied-leaves/applied-leaves.component";
 
 const routes: Routes = [
   {path:"login", component: LoginComponent},
@@ -19,7 +21,9 @@ const routes: Routes = [
   {path:"employees/edit/:id",component:EditComponent,canActivate:[AdminAuthGuardService]},
   {path:"employees/add",component:AddEmployeeComponent,canActivate:[AdminAuthGuardService]},
   {path:"profile",component:ProfileComponent,canActivate:[LoginGuardService]},
-  {path:"profile/editInfo",component:UpdateComponent,canActivate:[LoginGuardService]}
+  {path:"profile/editInfo",component:UpdateComponent,canActivate:[LoginGuardService]},
+  {path:"time-off/apply/:employeeId/:id",component:LeaveComponent,canActivate:[LoginGuardService]},
+  {path:"applied-leaves",component:AppliedLeavesComponent,canActivate:[LoginGuardService]}
 
 ];
 

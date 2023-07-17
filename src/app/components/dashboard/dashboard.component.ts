@@ -12,9 +12,13 @@ import {resolve} from "@angular/compiler-cli";
 export class DashboardComponent implements OnInit{
 
   dashBoardDto:DashBoardDto = new DashBoardDto();
-
+  weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+  d = new Date();
+  day = this.weekday[this.d.getDay()];
+  date=this.d.getDate();
+  month = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sept","Oct","Nov","Dec"];
+  currentMonth = this.month[this.d.getMonth()];
   constructor(private employeeService:EmployeeService) {
-
   }
 
   ngOnInit(){
@@ -23,7 +27,8 @@ export class DashboardComponent implements OnInit{
   getDashboardDetails(){
     this.employeeService.getDashboardDto().subscribe(response => {
       this.dashBoardDto = response;
-      console.log(this.dashBoardDto)
+      console.log(this.dashBoardDto);
     })
   }
+
 }

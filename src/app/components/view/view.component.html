@@ -1,4 +1,5 @@
 <a  (click)="goBack()" class="btn btn-secondary button">Back</a>
+
 <div class="container" style="width: 1000px">
   <div class="main-body">
     <div class="row gutters-sm">
@@ -6,11 +7,11 @@
         <div class="card">
           <div class="card-body">
             <div class="d-flex flex-column align-items-center text-center">
-              <img src="{{employee.photoUrl}}" alt="Admin" class="rounded" width="150">
+              <img src="{{employee?.photoUrl}}" alt="Admin" class="rounded" width="150">
               <div class="mt-3">
-                <h4 *ngIf="employee.firstname">{{employee?.firstname}}</h4>
-                <p class="text-secondary mb-1">{{employee.designation}}</p>
-                <p class="text-muted font-size-sm">Employee Id :{{employee.id}}</p>
+                <h4 *ngIf="employee?.firstname">{{employee?.firstname}}</h4>
+                <p class="text-secondary mb-1">{{employee?.designation}}</p>
+                <p class="text-muted font-size-sm">Employee Id :{{employee?.id}}</p>
               </div>
             </div>
           </div>
@@ -23,7 +24,7 @@
               <div class="col-sm-3">
                 <h6 class="mb-0">Full Name</h6>
               </div>
-              <div class="col-sm-9 text-secondary"*ngIf="employee.firstname">{{employee?.firstname}} {{employee.lastname}}
+              <div class="col-sm-9 text-secondary"*ngIf="employee?.firstname">{{employee?.firstname}} {{employee?.lastname}}
               </div>
             </div>
             <hr>
@@ -32,7 +33,7 @@
                 <h6 class="mb-0">Email</h6>
               </div>
               <div class="col-sm-9 text-secondary">
-                {{employee.email}}
+                {{employee?.email}}
               </div>
             </div>
             <hr>
@@ -41,7 +42,7 @@
                 <h6 class="mb-0">Mobile</h6>
               </div>
               <div class="col-sm-9 text-secondary">
-                {{employee.mobile}}
+                {{employee?.mobile}}
               </div>
             </div>
             <hr>
@@ -50,17 +51,17 @@
                 <h6 class="mb-0">Dept</h6>
               </div>
               <div class="col-sm-9 text-secondary">
-                {{employee.department.name}}
+                {{employee?.department.name}}
               </div>
             </div>
             <hr>
-            <div *ngIf="employee.reportTo !== 0">
+            <div *ngIf="employee?.reportTo !== 0">
               <div class="row">
                 <div class="col-sm-3">
                   <h6 class="mb-0">Direct manager</h6>
                 </div>
                 <div class="col-sm-9 text-secondary">
-                  <a style="color: blue;cursor: pointer" (click)="viewEmployee(reportTo.id)" *ngIf="reportTo.firstname">{{reportTo?.firstname}}</a> ({{reportTo.designation}})
+                  <a style="color: blue;cursor: pointer" (click)="viewEmployee(reportTo.id)" *ngIf="reportTo?.firstname">{{reportTo?.firstname}}</a> ({{reportTo?.designation}})
                 </div>
               </div>
               <hr>
@@ -90,7 +91,7 @@
                 <div class="col-sm-3">
                   <h6 class="mb-0">Full Name</h6>
                 </div>
-                <div class="col-sm-9 text-secondary"*ngIf="employee.firstname">{{employee?.firstname}}{{employee.lastname}}
+                <div class="col-sm-9 text-secondary"*ngIf="employee?.firstname">{{employee?.firstname}}{{employee?.lastname}}
                 </div>
               </div>
               <hr>
@@ -99,7 +100,7 @@
                   <h6 class="mb-0">Date of birth</h6>
                 </div>
                 <div class="col-sm-9 text-secondary">
-                  {{employee.dateOfBirth}}
+                  {{employee?.dateOfBirth}}
                 </div>
               </div>
               <hr>
@@ -108,7 +109,7 @@
                   <h6 class="mb-0">Address</h6>
                 </div>
                 <div class="col-sm-9 text-secondary">
-                  {{employee.address}}
+                  {{employee?.address}}
                 </div>
               </div>
               <hr>
@@ -127,7 +128,7 @@
                 <h6 class="mb-0">Employee Id</h6>
               </div>
               <div class="col-sm-9 text-secondary">
-                {{employee.id}}
+                {{employee?.id}}
               </div>
             </div>
             <hr>
@@ -136,7 +137,7 @@
                 <h6 class="mb-0">Date of Joining</h6>
               </div>
               <div class="col-sm-9 text-secondary">
-                {{employee.joinedOn}}
+                {{employee?.joinedOn}}
               </div>
             </div>
             <hr>
@@ -145,7 +146,7 @@
                 <h6 class="mb-0">Designation</h6>
               </div>
               <div class="col-sm-9 text-secondary">
-                {{employee.designation}}
+                {{employee?.designation}}
               </div>
             </div>
             <hr>
@@ -154,7 +155,7 @@
                 <h6 class="mb-0">Department</h6>
               </div>
               <div class="col-sm-9 text-secondary">
-                {{employee.department.name}}
+                {{employee?.department.name}}
               </div>
             </div>
             <hr>
@@ -173,7 +174,10 @@
       </div>
     </div>
   </div>
+  <a *ngIf="isAdmin" (click)="editEmployee(employee?.id)" class="btn btn-primary button">Edit</a>
+  <button *ngIf="isAdmin" (click)="deleteEmployee(employee?.id)" class="btn btn-danger button">Delete</button>
 </div>
+
 
 
 
@@ -195,31 +199,31 @@
 <!--      <tbody>-->
 <!--      <tr>-->
 <!--        <td>Name</td>-->
-<!--        <td *ngIf="employee.firstname">{{employee?.firstname+" "+employee.lastname}}</td>-->
+<!--        <td *ngIf="employee?.firstname">{{employee?.firstname+" "+employee?.lastname}}</td>-->
 <!--      </tr>-->
 <!--      <tr>-->
 <!--        <td>Email</td>-->
-<!--        <td>{{employee.email}}</td>-->
+<!--        <td>{{employee?.email}}</td>-->
 <!--      </tr>-->
 <!--      <tr>-->
 <!--        <td>Mobile</td>-->
-<!--        <td>{{employee.mobile}}</td>-->
+<!--        <td>{{employee?.mobile}}</td>-->
 <!--      </tr>-->
 <!--      <tr>-->
 <!--        <td>Designation</td>-->
-<!--        <td>{{employee.designation}}</td>-->
+<!--        <td>{{employee?.designation}}</td>-->
 <!--      </tr>-->
 <!--      <tr>-->
 <!--        <td>Department</td>-->
-<!--        <td>{{employee.department.name}}</td>-->
+<!--        <td>{{employee?.department.name}}</td>-->
 <!--      </tr>-->
 <!--      <tr>-->
 <!--        <td>Date of Birth</td>-->
-<!--        <td>{{employee.dateOfBirth}}</td>-->
+<!--        <td>{{employee?.dateOfBirth}}</td>-->
 <!--      </tr>-->
 <!--      <tr>-->
 <!--        <td>Joined On</td>-->
-<!--        <td>{{employee.joinedOn}}</td>-->
+<!--        <td>{{employee?.joinedOn}}</td>-->
 <!--      </tr>-->
 <!--      <tr *ngIf="reportTo">-->
 <!--        <td>Report to</td>-->
@@ -228,8 +232,8 @@
 <!--      </tr>-->
 <!--      <tr>-->
 <!--        <td>-->
-<!--          <a *ngIf="isAdmin" (click)="editEmployee(employee.id)" class="btn btn-primary button">Edit</a>-->
-<!--          <button *ngIf="isAdmin" (click)="deleteEmployee(employee.id)" class="btn btn-danger button">Delete</button>-->
+<!--          <a *ngIf="isAdmin" (click)="editEmployee(employee?.id)" class="btn btn-primary button">Edit</a>-->
+<!--          <button *ngIf="isAdmin" (click)="deleteEmployee(employee?.id)" class="btn btn-danger button">Delete</button>-->
 <!--          <a  (click)="goBack()" class="btn btn-secondary button">Back</a>-->
 <!--        </td>-->
 <!--      </tr>-->
